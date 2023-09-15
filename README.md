@@ -1,3 +1,7 @@
+
+Create an EKS cluster and deploy 2048 game into that cluster
+==================================================
+
 Task 1: Create an EKS cluster
 =============================
 Name: <yourname>-eks-cluster-1
@@ -37,6 +41,7 @@ Choose default values for other fields
 
 Node group creation may take 2-3 minutes
 
+
 Task 3: Authenticate to this cluster
 ===================================
 Reference:
@@ -60,6 +65,35 @@ kubectl get nodes
 
 # Install nano editor in cloudshell. We will need this in the next task
 sudo yum install nano -y
+
+
+
+Task 4: Create a new POD in EKS for the 2048 game
+================================================
+
+# clean up the files in cloudshell (Optional)
+rm *.* 
+
+# create the config file in YAML to deploy 2048 game pod into the cluster
+nano 2048-pod.yaml
+
+
+
+
+# apply the config file to create the pod
+kubectl apply -f 2048-pod.yaml
+#pod/2048-pod created
+
+# view the newly created pod
+kubectl get pods
+
+
+Task 5: Setup Load Balancer Service
+===================================
+nano mygame-svc.yaml  
+
+
+
 # apply the config file
 kubectl apply -f mygame-svc.yaml
 
@@ -77,13 +111,19 @@ curl a06aa56b81f5741268daca84dca6b4f8-694631959.us-east-1.elb.amazonaws.com:80
 # setup to be complete)
 
 
-
 Task 3: Cleanup
----------------
+
+
 # Clean up all the resources created in the task
 kubectl get pods
 kubectl delete -f 2048-pod.yaml
 
 kubectl get services
 kubectl delete -f mygame-svc.yaml
-![image](https://github.com/Shreyashbhise/Kubernetes-End-to-End-project-on-EKS-/assets/108046802/aeeafb6d-0e2b-4e86-9541-5af3f9cd08e7)
+
+![image](https://github.com/Shreyashbhise/Kubernetes-End-to-End-project-on-EKS-/assets/108046802/1c4a3b3a-2228-4e31-9d37-3e11045cc988)
+
+
+####################################################################
+
+
